@@ -1,3 +1,7 @@
-<aura:component >
-	
+<aura:component controller="BoatSearchFormController">
+    <aura:attribute name="boatTypes" type="BoatType__c[]" />
+    <lightning:layout horizontalAlign="center">
+            <lightning:button variant="blue" label="Search" onclick="{! c.handleClick }"/>
+            <lightning:button variant="white" label="New" onclick="{! c.handleClick }"/>
+    </lightning:layout>
 </aura:component>
