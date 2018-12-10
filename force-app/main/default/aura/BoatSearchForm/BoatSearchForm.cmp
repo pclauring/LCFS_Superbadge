@@ -1,15 +1,16 @@
 <aura:component controller="BoatSearchFormController" implements="flexipage:availableForAllPageTypes">
     <aura:attribute name="boatTypes" type="BoatType__c[]" />
-    <aura:attribute name="selectboatTypeId" type="ID" default="" />
+    <aura:attribute name="selectedBoatTypeID" type="string" default="" />
     <aura:attribute name="renderNewButton" type="boolean" default="false" />
 
 
     <aura:registerEvent name="createBoat" type="c:createBoatEvent"/>
+    <aura:handler name="change" value="{!v.value}" action="{!c.handleChange}"/>
     <aura:handler name="createBoatEvent" event="c:createBoatEvent" action="{!c.handleCreateBoatEvent}"/>
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <lightning:layout horizontalAlign="center">
-            <lightning:select aura:id="selectedBoatType" label="Select a Boat Type" value="{!v.boatTypeId}">
+            <lightning:select aura:id="selectedBoatType" label="Select a Boat Type" value="{!v.selectedBoatTypeID}">
                     <option value="" text="All Types"></option>
                             <aura:iteration items="{!v.boatTypes}" var="boatType">
                                 <option value="{!boatType.id}" text="{!boatType.Name}"></option>
@@ -17,7 +18,7 @@
                         </lightning:select>
             <lightning:button variant="brand" label="Search" onclick="{! c.handleClick }"/>
             <aura:if isTrue="{!v.renderNewButton}">
-            <lightning:button variant="neutral" label="New" onclick="{! c.createNewBoat }"/>
+            <lightning:button variant="neutral" label="New" onclick="{! c.handleCreateBoatEvent }"/>
             </aura:if>
     </lightning:layout>
 </aura:component>

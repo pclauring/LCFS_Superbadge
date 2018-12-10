@@ -20,25 +20,32 @@
         // Send action off to be executed
         $A.enqueueAction(action);
 	},
+
+	handleChange : function(component, event, helper){
+				component.set("v.selectedBoatTypeID", component.find("selectedBoatType").get("v.value"));
+			},
+		
 	
 	createNewBoat: function (component, event, helper) {
 		var createBoat = component.getEvent("createBoat");
-		var boatypeID = component.get("v.selectedBoatType")
-		createBoat.setParams({ "boatType": boatypeID });
+		var boatTypeID = component.get("v.selectedBoatType");
+		createBoat.setParams({ "boatType": boatTypeID });
 		createBoat.fire();
 
 	},
 	handleCreateBoatEvent: function (component, event, helper) {
+		debugger;
 		var boatType = event.getParam("boatType");
+		var boatTypeID = component.find("selectedBoatType").get("v.value");
 		var createRecordEvent = $A.get("e.force:createRecord");
 		createRecordEvent.setParams({
 			"entityApiName": "Boat__c"
 		});
-		if (!boatTypeId == "") {
+		if (!boatType == "") {
 			createNewBoat.setParams({
 				"defaultFieldValues": { 'BoatType__c': boatType }
 			})
-		}
+		};
 		createRecordEvent.fire();
 	}
 })

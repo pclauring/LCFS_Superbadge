@@ -1,3 +1,12 @@
-<aura:component >
-	
+<aura:component implements="flexipage:availableForAllPageTypes">
+        <lightning:card title="Find a Boat">
+            <p class="slds-p-horizontal_small">
+                <c:BoatSearchForm />
+            </p>
+        </lightning:card>
+        <lightning:card footer="Search Results Above" title="Matching Boats">
+            <p class="slds-p-horizontal_small">
+                <c:BoatSearchResults />
+            </p>
+        </lightning:card>
 </aura:component>
